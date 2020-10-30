@@ -1,7 +1,19 @@
+
 import React, { Component } from 'react'
-
-
+import axios from 'axios';
+import URL from './Url';
 export default class Customerorderlist extends Component {
+ async componentDidMount(){
+    await  axios.post(`${URL}/ordersave`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+       
+      }
+    }).then(res=>{
+      alert('ok')
+    })
+  }
     render() {
         return (
             <div className="p-4">

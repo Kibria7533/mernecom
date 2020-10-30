@@ -44,6 +44,7 @@ class User extends Component {
         }).then(async (responseok) => {
 
             let cartItems = [];
+            if(responseok.data){
             if (localStorage.getItem('auth') && responseok.data[0].cart) {
                 if (responseok.data[0].cart.length > 0) {
 
@@ -54,7 +55,7 @@ class User extends Component {
 
                 }
             }
-
+        }
 
             await Axios.get(`${URL}/api/product/products_by_id?id=${cartItems}&type=array`)
                 .then(response => {

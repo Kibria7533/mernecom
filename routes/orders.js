@@ -7,22 +7,22 @@ const SSLCommerz = require('sslcommerz-nodejs');
  
 let settings = {
     isSandboxMode: true, //false if live version
-    store_id: "storeid",
-    store_passwd: "storepasswd"
+    store_id: "mad5f9be0626f489",
+    store_passwd: "mad5f9be0626f489@ssl"
 }
  
 let sslcommerz = new SSLCommerz(settings);
 
 
 router.post('/ordersave',(req,res)=>{
-
+console.log('working')
     let post_body = {};
 post_body['total_amount'] = 100.26;
 post_body['currency'] = "BDT";
 post_body['tran_id'] = "12345";
-post_body['success_url'] = "your success url";
-post_body['fail_url'] = "your fail url";
-post_body['cancel_url'] = "your cancel url";
+post_body['success_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
+post_body['fail_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
+post_body['cancel_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
 post_body['emi_option'] = 0;
 post_body['cus_name'] = "test";
 post_body['cus_email'] = "test@test.com";
@@ -38,6 +38,7 @@ post_body['product_category'] = "Test Category";
 post_body['product_profile'] = "general";
 sslcommerz.init_transaction(post_body).then(response => {
     console.log(response);
+    res.send(response)
 }).catch(error => {
     console.log(error);
 })

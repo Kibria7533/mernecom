@@ -23,7 +23,7 @@ const value=data.target.value;
 }
 formsubmit=async (data)=>{
 data.preventDefault();
-await axios.post(`${URL}/api/users/login-admin`, {
+await axios.post(`${URL}/api/users/login-admin`, { 
   "username": this.state.username,
   "password": this.state.password,
 },{
