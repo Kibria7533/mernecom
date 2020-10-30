@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import URL from './Url';
+
 export default class Customerorderlist extends Component {
  async componentDidMount(){
     await  axios.post(`${URL}/ordersave`, {
@@ -11,6 +12,7 @@ export default class Customerorderlist extends Component {
        
       }
     }).then(res=>{
+      console.log(res)
       alert('ok')
     })
   }
