@@ -234,7 +234,7 @@ class Header extends Component {
                     <div>
                    <a href="/cart"> <i className="fa" style={{fontSize:"20px"  ,color:"orange" ,marginTop: "39px"
     }}>&#xf07a;</i></a>
-<span className='badge badge-warning' id='lblCartCount' style={{    marginTop: "33px"}}> 5 </span>
+<span className='badge badge-warning' id='lblCartCount' style={{    marginTop: "33px"}}>{this.props.addtocart}</span>
                     </div>
                     <div style={{ "marginTop": "27px", "paddingLeft": "5px" }}> 
                     

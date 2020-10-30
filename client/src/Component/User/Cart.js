@@ -27,7 +27,7 @@ class Cart extends Component {
           <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
         <h4 className="product-name"><strong>{item.title}</strong></h4>
             <h4>
-        <small>{item.description}</small>
+       <div><small>{item.description}</small></div> 
             </h4>
           </div>
           <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">

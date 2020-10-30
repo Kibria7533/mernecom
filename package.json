@@ -29,6 +29,7 @@
     "nodemailer": "^6.4.14",
     "nodemon": "^2.0.5",
     "react-multilevel-sidebar": "^1.0.4",
+    "sslcommerz": "^1.0.4",
     "sslcommerz-nodejs": "^1.0.8"
   }
 }

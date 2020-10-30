@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import URL from './Url';
 
+
 export default class Customerorderlist extends Component {
  async componentDidMount(){
     await  axios.post(`${URL}/ordersave`, {
@@ -16,9 +17,20 @@ export default class Customerorderlist extends Component {
       alert('ok')
     })
   }
+  
     render() {
+      (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+            tag.parentNode.insertBefore(script, tag);
+        };
+      
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+      })(window, document);
         return (
             <div className="p-4">
+              
   <h3>Order Tracking</h3>
   <table className="table table-bordered track_tbl">
     <thead>

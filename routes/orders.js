@@ -17,7 +17,7 @@ let sslcommerz = new SSLCommerz(settings);
 router.post('/ordersave',(req,res)=>{
 console.log('working')
     let post_body = {};
-post_body['total_amount'] = 100.26;
+post_body['total_amount'] = 10000;
 post_body['currency'] = "BDT";
 post_body['tran_id'] = "12345";
 post_body['success_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
