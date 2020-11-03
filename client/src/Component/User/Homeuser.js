@@ -8,7 +8,7 @@ class Homeuser extends Component {
     render() {
         return (
             <div >
-               <Productshow addToCarthandler={this.props.addToCarthandler}/>
+               <Productshow category={this.props.match.params.category} addToCarthandler={this.props.addToCarthandler}/>
             </div>
         );
     }

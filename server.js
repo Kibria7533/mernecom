@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 const cor=require('cors')
 
 app.use(bp.json());
-mongoose.connect(process.env.DB_URL||'mongodb://localhost:27017/test',{useNewUrlParser:true,useUnifiedTopology:true});
+// process.env.DB_URL||||'mongodb://localhost:27017/test'
+mongoose.connect(process.env.DB_URL,{useNewUrlParser:true,useUnifiedTopology:true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
@@ -22,7 +23,9 @@ app.use("/api/users", require("./routes/users"));
 app.use(require("./routes/googleuser"));
 app.use(require("./routes/facebookuser"));
 app.use(require("./routes/orders"));
+app.use(require("./routes/comments&reviewroute"));
 app.use('/uploads', express.static('uploads'));
+
 if (process.env.NODE_ENV === "production") {
 
   // Set static folder

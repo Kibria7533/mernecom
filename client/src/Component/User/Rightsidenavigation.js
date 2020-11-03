@@ -3,14 +3,19 @@ import OffCanvas from 'react-aria-offcanvas'
 import { Link } from 'react-router-dom'
  
 const Navigation = () => (
-  <nav id="menu">
-    <ul>
-      <li>
-        <Link to="/logout">Your Profile</Link>
+  <nav id="menu" >
+    <ul className="list-unstyled mx-2" >
+      <li >
+        <a href="/profile">Profile</a>
       </li>
-      
       <li>
-      <Link to="/logout" >Become A Member?</Link>
+      <a href="/cart" >My Cart</a>
+      </li>
+      <li>
+      <Link to="/logout" >My Wishlist</Link>
+      </li>
+      <li>
+      <a href="/customerorderlist" >My Order</a>
       </li>
       <li>
       <a href="/logout">Log Out</a>
@@ -44,20 +49,23 @@ componentWillReceiveProps(props){
     this.props.setOpen()
   }
  
+  
   render() {
     return (
-      <div>
+      <div >
         
         <OffCanvas
+         className="myright"
           isOpen={this.state.isOpen}
           onClose={this.close}
           labelledby="menu-button"
           position="right"
          
+         
         >
-          <button  style={{"marginTop": "63px",
-   "marginRight": "-89px"}} onClick={this.close}>Close</button>
-          <Navigation/>
+         <a href="/"> <button  style={{"marginTop": "63px",
+   "marginRight": "-89px"}} onClick={this.close} >Close</button></a>
+          <Navigation />
         </OffCanvas>
       </div>
     )

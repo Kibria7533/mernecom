@@ -22,7 +22,7 @@ function RadioBox(props) {
     return (
         <div>
             
-            <Collapsible trigger="Price" style={{backgroundColor:"wheat"}}>
+            <Collapsible trigger={<button>Price filter</button>} style={{backgroundColor:"wheat"}}>
             <Radio.Group onChange={handleChange} value={Value}>
 
 {renderRadioBox()}

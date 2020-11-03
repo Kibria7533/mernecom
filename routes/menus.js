@@ -29,7 +29,8 @@ router.get('/getmenus',async(req,res)=>{
     
 })
 
-router.post('/editcategory',async(req,res)=>{
+router.post('/editcategory',userAuth,
+checkRole(["admin"]),async(req,res)=>{
     const {oldcategory,newcategory}=req.body;
     const data= await Menus.updateOne({ "CategoryName" : oldcategory},{$set:{ "CategoryName" : newcategory}})
     if(data){
@@ -37,21 +38,24 @@ router.post('/editcategory',async(req,res)=>{
     }
 
 })
-router.post('/editsubcategory',async(req,res)=>{
+router.post('/editsubcategory',userAuth,
+checkRole(["admin"]),async(req,res)=>{
     const {oldsubcategory,newsubcategory}=req.body;
     const data=await Menus.updateOne({"SubCategory.Name":oldsubcategory},{$set:{"SubCategory.$":{"Name":newsubcategory}}})
     if(data){
         res.json({"success":true});
     }
 })
-router.post('/deletesubcategory',async(req,res)=>{
+router.post('/deletesubcategory',userAuth,
+checkRole(["admin"]),async(req,res)=>{
     const {subcategory}=req.body;
     const data=await Menus.updateOne({ "SubCategory.Name":subcategory},{$pull:{"SubCategory":{"Name":subcategory}}})
     if(data){
         res.json({"success":true});
     }
 })
-router.post('/deletecategory',async(req,res)=>{
+router.post('/deletecategory',userAuth,
+checkRole(["admin"]),async(req,res)=>{
     const {id}=req.body;
     const data=await Menus.findOneAndRemove({_id:id});
     if(data){

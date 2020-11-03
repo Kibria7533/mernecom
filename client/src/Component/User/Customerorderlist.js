@@ -3,31 +3,30 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import URL from './Url';
 
-
+import Invoice from './Invoice'
+import Moment from 'react-moment';
 export default class Customerorderlist extends Component {
- async componentDidMount(){
-    await  axios.post(`${URL}/ordersave`, {
+constructor(){
+  super()
+  this.state={
+    orders:[]
+  }
+}
+  componentDidMount(){
+    axios.get(`${URL}/getuserorder`,{
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-       
+        'auth':localStorage.getItem('auth')
       }
     }).then(res=>{
-      console.log(res)
-      alert('ok')
+      this.setState({orders:res.data})
+      
     })
   }
-  
+ 
     render() {
-      (function (window, document) {
-        var loader = function () {
-            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
-            tag.parentNode.insertBefore(script, tag);
-        };
-      
-        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-      })(window, document);
+     
         return (
             <div className="p-4">
               
@@ -39,25 +38,34 @@ export default class Customerorderlist extends Component {
         <th>S No</th>
         <th>Order Id</th>
         <th>Status</th>
-        <th>Distibutor</th>
+       
         <th>Date/Time</th>
         <th>Invoices</th>
         <th>Order Details</th>
       </tr>
     </thead>
     <tbody>
-      <tr className="active">
-        <td className="track_dot">
-          <span className="track_line" />
-        </td>
-        <td>01</td>
-        <td>#786701</td>
-        <td><button>pending</button></td>
-        <td>SA Servieces</td>
-        <td>31/07/2018 22:24:PM</td>
-        <td><button>check//print</button></td>
-        <td><a href="/customerordertable"><button>check</button></a></td>
-      </tr>
+      {this.state.orders.map((item,index)=>{
+        return(
+          <tr className="active" key={index}>
+          <td className="track_dot">
+            <span className="track_line" />
+          </td>
+        <td>{index+1}</td>
+        <td>#{item.orderid}</td>
+        {item.orderstatus==1&&<td><button>pending</button></td>}
+        {item.orderstatus==2&&<td><button>accepted</button></td>}
+        {item.orderstatus==3&&<td><button>on the way</button></td>}
+        {item.orderstatus==4&&<td><button>completed</button></td>}
+          
+         
+        <td><Moment >{item.createdAt}</Moment></td>
+          <td><a href={`/invoice/${item.orderid}`}><button>print/save</button></a></td>
+          <td><a href={`/customerordertable/${item.orderid}`}><button>check</button></a></td>
+        </tr>
+        )
+      })}
+     
      
     
      
@@ -69,3 +77,4 @@ export default class Customerorderlist extends Component {
         )
     }
 }
+

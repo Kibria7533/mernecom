@@ -124,6 +124,8 @@ class Header extends Component {
         return (
             <BrowserRouter>
             <div>
+            <Leftsidenavigation sidemenudata={this.state.sidemenudata} open={this.state.opensidebar}/>
+                    <Rightsidenavigation style={{color:"red"}} open={this.state.open} setOpen={this.setOpenhandeler} />
                 <div className="desktopnav you">
 
                     {this.state.showstate &&
@@ -146,7 +148,7 @@ class Header extends Component {
                 <nav className="desktopnav navbar navbar-expand-sm navbar-dark  bg-dark fixed-top">
                     <div className="container-fluid">
 
-                        <a className="navbar-brand" href="/">Start Bootstrap</a>
+                        <a className="navbar-brand" href="/">MAD_ECOM</a>
                      
 
                         <div >
@@ -165,7 +167,7 @@ class Header extends Component {
                                                 <a className="nav-link  dropdown-toggle" data-toggle="dropdown">{item.CategoryName} </a>
                                                 <ul className="dropdown-menu dropdown-menu-right">
                                                     {item.SubCategory.map((sub, index) => {
-                                                        return (<li key={index}><a className="dropdown-item" href="#">{sub.Name}</a></li>)
+                                                        return (<li key={index}><a className="dropdown-item" href={`/${sub.Name}`}>{sub.Name}</a></li>)
                                                     })
                                                     }
 
@@ -175,7 +177,7 @@ class Header extends Component {
                                     }
                                     else {
                                         return (<li key={index} className="nav-item">
-                                            <a className="nav-link" href="#">{item.CategoryName}</a>
+                                            <a className="nav-link" href={`/${item.CategoryName}`}>{item.CategoryName}</a>
                                         </li>)
                                     }
 
@@ -224,7 +226,7 @@ class Header extends Component {
                         </svg>
                     </button></div>
                     
-                    <div className="bg-warning"><a className="navbar-brand" href="/" style={{ "margin": "10px" }}>Start Bootstrap</a>
+                    <div className="bg-warning"><a className="navbar-brand" href="/" style={{ "margin": "10px" }}>MAD_ECOM</a>
                     </div>
                     <div>
                     <i className="fa fa-heart" style={{fontSize:"20px"  ,color:"red" ,marginTop: "39px"
@@ -265,8 +267,7 @@ class Header extends Component {
                       </div>
                 </div>
                
-                <Leftsidenavigation sidemenudata={this.state.sidemenudata} open={this.state.opensidebar}/>
-                    <Rightsidenavigation  open={this.state.open} setOpen={this.setOpenhandeler} />
+                
             </div>
             </BrowserRouter>
         );

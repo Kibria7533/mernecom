@@ -1,47 +1,56 @@
 const express = require('express');
 const router = express.Router();
-
 const multer = require('multer');
+const { Order } = require("../model/Orders");
+const { userAuth, checkRole } = require("../utils/Auth");
+const User = require("../model/User");
+router.post('/ordersave', userAuth,
+    checkRole(["user", "admin"]), async (req, res) => {
+        const order = await new Order({
+            userid: req.user.user_id,
+            orderid:req.body.paymentid,
+            paymentid: req.body.paymentid,
+            products: req.body.products,
+            address: req.body.address,
+            total: req.body.total,
+            orderstatus: "1",
+            paymentmethod: "paypal",
+            dateofpurcashe:Date.now()
 
-const SSLCommerz = require('sslcommerz-nodejs');
- 
-let settings = {
-    isSandboxMode: true, //false if live version
-    store_id: "mad5f9be0626f489",
-    store_passwd: "mad5f9be0626f489@ssl"
-}
- 
-let sslcommerz = new SSLCommerz(settings);
+        })
+
+        order.save().then(respo => {
+            User.findOneAndUpdate(
+                { _id: req.user.user_id },
+                {  $set: { cart: [] } },
+                { new: true },
+                (err, user) => {
+                    if (err) return res.json({ success: false, err });
+                })
+            res.send(respo)
+
+        }).catch(err => {
+            console.log('errror', err)
+            res.send(err)
+        })
 
 
-router.post('/ordersave',(req,res)=>{
-console.log('working')
-    let post_body = {};
-post_body['total_amount'] = 10000;
-post_body['currency'] = "BDT";
-post_body['tran_id'] = "12345";
-post_body['success_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
-post_body['fail_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
-post_body['cancel_url'] = "https://mernecomkb.herokuapp.com/customerorderlist";
-post_body['emi_option'] = 0;
-post_body['cus_name'] = "test";
-post_body['cus_email'] = "test@test.com";
-post_body['cus_phone'] = "01700000000";
-post_body['cus_add1'] = "customer address";
-post_body['cus_city'] = "Dhaka";
-post_body['cus_country'] = "Bangladesh";
-post_body['shipping_method'] = "NO";
-post_body['multi_card_name'] = ""
-post_body['num_of_item'] = 1;
-post_body['product_name'] = "Test";
-post_body['product_category'] = "Test Category";
-post_body['product_profile'] = "general";
-sslcommerz.init_transaction(post_body).then(response => {
-    console.log(response);
-    res.send(response)
-}).catch(error => {
-    console.log(error);
-})
+    })
+    router.get('/getuserorder',userAuth,
+    checkRole(["user", "admin"]),async(req,res)=>{
+        const order=await Order.find({userid:req.user.user_id}).then(data=>{
+            res.send(data);
+        }).catch(err=>{
+            res.send(err)
+        })
+    })
+    router.get('/getsingleorder',async(req,res)=>{
+        console.log(req.query.orderid)
+        const data=await Order.find({orderid:req.query.orderid}).then(item=>{
+            res.send(item)
+        }).catch(err=>{
+            res.send(err)
+        })
 
-})
+    })
 module.exports = router;

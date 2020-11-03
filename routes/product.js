@@ -134,6 +134,14 @@ router.get("/products_by_id", (req, res) => {
         })
 });
 
+router.get('/getcategoryproduct',async(req,res)=>{
+    console.log(req.query.category)
+ const data=await Product.find({$or:[{"category" : req.query.category},{"subcategory":req.query.category}]})
+ if(data){
+     res.send(data)
+ }
+ 
 
+})
 
 module.exports = router;

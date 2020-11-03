@@ -17,12 +17,14 @@ class Productshow extends Component {
       Filters: {
         price: []
       },
+      searchcategory:"",
       searchTerms:""
 
 
     }
   }
   getProducts =async (variables) => {
+
     await Axios.post(`${URL}/api/product/getProducts`, variables)
       .then(response => {
         if (response.data.success) {
@@ -59,12 +61,21 @@ class Productshow extends Component {
 }
 
   componentDidMount() {
-    const variables = {
-      skip: this.state.Skip,
-      limit: this.state.Limit,
-    }
+    // console.log(this.props.match.params.category)
+     if(this.props.match.params.category){
+       Axios.get(`${URL}/api/product/getcategoryproduct/?category=${this.props.match.params.category}`).then(response=>{
+        this.setState({ Products: response.data })
+       })
 
-    this.getProducts(variables)
+     }else{
+      const variables = {
+        skip: this.state.Skip,
+        limit: this.state.Limit,
+      }
+  
+      this.getProducts(variables)
+     }
+   
 
   }
 
@@ -123,12 +134,7 @@ class Productshow extends Component {
     this.setState({ Filters: newFilters })
   }
 
-  // handleSearchBoxValChange = (e)=>{
-  //   this.setState({
-  //     searchBoxVal:e.target.value
-  //   })
-  //   console.log(e.target.value)
-  // }
+ 
  
   handleSearchBoxSubmit = (e)=>{
     e.preventDefault();
@@ -147,6 +153,8 @@ class Productshow extends Component {
 
  
 
+   
+
   render() {
    
 
@@ -154,9 +162,7 @@ class Productshow extends Component {
 
       <div className="container-fluid">
 
-        {/* <Ri open={this.state.open} setOpen={this.setOpenhandeler} />
-
-       <MyComponent sidemenudata={this.state.sidemenudata} open={this.state.opensidebar}/> */}
+    
         
 
         <div className="row" style={{ marginTop: "40px" }}>
@@ -186,11 +192,11 @@ class Productshow extends Component {
 </div>
 
 </div>
-            <h1 className="my-4">Shop Name</h1>
+            <h1 className="my-4">Top categories</h1>
             <div className="list-group">
-              <a href="#" className="list-group-item">Category 1</a>
-              <a href="#" className="list-group-item">Category 2</a>
-              <a href="#" className="list-group-item">Category 3</a>
+              <a href="#" className="list-group-item">Electronics</a>
+              <a href="#" className="list-group-item">Fabrics</a>
+              <a href="#" className="list-group-item">Daily Goods</a>
             </div>
           </div>
           {/* /.col-lg-3 */}
