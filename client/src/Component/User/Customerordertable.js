@@ -60,7 +60,7 @@ componentDidMount(){
         return(
 <li className="col-md-4" key={index}>
           <figure className="itemside mb-3">
-            <div className="aside"><img src={`http://localhost:5000/${it.Images[0]}`} className="img-sm border" /></div>
+            <div className="aside"><img src={`${URL}/${it.Images[0]}`} className="img-sm border" /></div>
             <figcaption className="info align-self-center">
         <p className="title">{it.title} <br /> {it.brand}</p> <span className="text-muted">${it.price} </span>
             </figcaption>

@@ -35,13 +35,13 @@ export default class Makeinvoice extends Component {
       <header>
         <div className="row">
           <div className="col">
-            <a target="_blank" href="https://lobianijs.com">
+            <a target="_blank" href="#">
               <h2>Wellcom</h2>
             </a>
           </div>
           <div className="col company-details">
             <h2 className="name">
-              <a target="_blank" href="https://lobianijs.com">
+              <a target="_blank" href="#">
                 MAD_ECOM
               </a>
             </h2>

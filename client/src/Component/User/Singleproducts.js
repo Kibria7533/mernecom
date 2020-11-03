@@ -37,8 +37,8 @@ comments:[]
 
           response.data[0].Images.map(item => {
               images.push({
-                  original: `http://localhost:5000/${item}`,
-                  thumbnail: `http://localhost:5000/${item}`
+                  original: `${URL}/${item}`,
+                  thumbnail: `${URL}/${item}`
               })
           })
          this.setState({images})

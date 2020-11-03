@@ -242,7 +242,7 @@ class Productshow extends Component {
                       <div className="single-publication">
                         <figure >
                           <a href={`/singleproduct/${item._id}`}>
-                            <img style={{ width: '100%', maxHeight: '150px' ,minWidth:"100%"}} src={`http://localhost:5000/${item.Images[0]}`} alt="productImage" />
+                            <img style={{ width: '100%', maxHeight: '150px' ,minWidth:"100%"}} src={`${URL}/${item.Images[0]}`} alt="productImage" />
                           </a>
                           <ul style={{right: "-13px"}}>
                             <li><a href="#" title="Add to Favorite"><i className="fa fa-heart" /></a></li>
