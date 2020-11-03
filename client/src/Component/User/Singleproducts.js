@@ -137,7 +137,7 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
           </h5>
           <div className="action">
             <button className="add-to-cart btn btn-default" onClick={()=>this.props.addToCarthandler(this.props.match.params.productId,"add")}  type="button">add to cart</button>
-            <button className="like btn btn-default" type="button" style={{marginLeft: "94px"}}><span className="fa fa-heart" /></button>
+            <button className="like btn btn-default" type="button" style={{marginLeft: "14px"}}><span className="fa fa-heart" /></button>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
      
      
       <Collapsible trigger={<button>Comment & Review</button>} style={{backgroundColor:"wheat"}}>
-       <div className="d-flex justify-content-around m-4">
+       <div className="d-flex justify-content-start mt-2">
     
     <form onSubmit={this.handleSubmit}>
         <label>
