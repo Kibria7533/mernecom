@@ -183,8 +183,8 @@ class Header extends Component {
 
                                 })}
                                 <li>
-                             <a href="/" > <i className="fa fa-heart" style={{fontSize:"24px" ,margin:"5px" ,color:"red"}}></i></a>
-<span className='badge badge-warning' id='lblCartCount'> 5 </span>
+                             <a href="/wishlist" > <i className="fa fa-heart" style={{fontSize:"24px" ,margin:"5px" ,color:"red"}}></i></a>
+<span className='badge badge-warning' id='lblCartCount'>{this.props.wishlistnumber} </span>
                                    </li> 
                                <li>
                              <a href="/cart">  <i className="fa" style={{fontSize:"24px" ,margin:"5px" ,color:"orange"}}>&#xf07a;</i></a>
@@ -226,12 +226,12 @@ class Header extends Component {
                         </svg>
                     </button></div>
                     
-                    <div className="bg-warning"><a className="navbar-brand" href="/" style={{ "margin": "10px" }}>MAD_ECOM</a>
+                    <div className="bg-warning"><a className="navbar-brand" href="/wishlist" style={{ "margin": "10px" }}>MAD_ECOM</a>
                     </div>
                     <div>
                     <i className="fa fa-heart" style={{fontSize:"20px"  ,color:"red" ,marginTop: "39px"
     }}></i>
-<span className='badge badge-warning' id='lblCartCount' style={{    marginTop: "33px"}}> 5 </span>
+<span className='badge badge-warning' id='lblCartCount' style={{    marginTop: "33px"}}>{this.props.wishlistnumber} </span>
                     </div>
                     <div>
                    <a href="/cart"> <i className="fa" style={{fontSize:"20px"  ,color:"orange" ,marginTop: "39px"

@@ -64,7 +64,7 @@ await  transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error)
         return res.status(400).json({
-          message: "Unable to create your account mailing problem.",
+          message: {msg:`Probabliy you dont have internet.`},
           success: false
         });
        
@@ -79,13 +79,13 @@ await  transporter.sendMail(mailOptions, function(error, info){
          newUser.save().then(data=>{
           console.log('Email sent: ' + info.response);
           return res.status(201).json({
-            message: "Hurry! now you are successfully registred. Please  login.",
+            message: {msg:`Hurry! now you are successfully registred. Please  login.`},
             success: true
           });
          }).catch(er=>{
           
           return res.status(400).json({
-            message: "Unable to create your account.",
+            message:  {msg:`Unable to create your account..`},
             success: false
           });
          })
@@ -98,7 +98,7 @@ await  transporter.sendMail(mailOptions, function(error, info){
       catch(errror){
        
         return res.status(500).json({
-          message: "Unable to create your account.",
+          message: {msg:`Unable to create your account..`},
           success: false
         });
       }
@@ -108,7 +108,7 @@ await  transporter.sendMail(mailOptions, function(error, info){
   } catch (err) {
     // Implement logger function (winston)
     return res.status(500).json({
-      message: "Unable to create your account.",
+      message: {msg:`Unable to create your account..`},
       success: false
     });
   }

@@ -27,7 +27,10 @@ const UserSchema = new Schema(
     cart: {
       type: Array,
       default: []
-  },
+  },wishlist: {
+    type: Array,
+    default: []
+},
     username: {
       type: String,
       required: true

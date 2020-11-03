@@ -245,7 +245,7 @@ class Productshow extends Component {
                             <img style={{ width: '100%', maxHeight: '150px' ,minWidth:"100%"}} src={`${URL}/${item.Images[0]}`} alt="productImage" />
                           </a>
                           <ul style={{right: "-13px"}}>
-                            <li><a href="#" title="Add to Favorite"><i className="fa fa-heart" /></a></li>
+                            <li><button title="Add to Favorite"  onClick={()=>this.props.addTowishlist(item._id,"add")} ><i className="fa fa-heart" /></button></li>
                             <li><a href="#" title="Add to Compare"><i className="fa fa-refresh" /></a></li>
                             <li><a  href={`/singleproduct/${item._id}`} title="Quick View"><i className="fa fa-search" /></a></li>
                           </ul>

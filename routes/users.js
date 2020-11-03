@@ -427,6 +427,84 @@ checkRole(["user","admin"]), (req, res) => {
   })
 });
 
+router.get('/addToWish', userAuth,
+checkRole(["user","admin"]), (req, res) => {
+  console.log('wish list click')
+ 
+  
+  User.findOne({ _id: req.user.user_id }, (err, userInfo) => {
+    if( req.query.type=="add"){
+      console.log('sub')
+      let duplicate = false;
+
+      if(userInfo.wishlist.length){
+        userInfo.wishlist.forEach((item) => {
+            if (item.id == req.query.productId) {
+                duplicate = true;
+            }
+        })
+      }
+  
+        if (duplicate) {
+        return res.json({ success: false, msg:"Already in Your Wishlist"  ,duplicate:true});
+        } else {
+          console.log('not duplicate')
+           User.findOneAndUpdate(
+                { _id:  req.user.user_id },
+                {
+                    $push: {
+                      wishlist: {
+                            id: req.query.productId,
+                            quantity: 1,
+                            date: Date.now()
+                        }
+                    }
+                },
+                { new: true },
+                (err, userInfo) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json(userInfo.wishlist)
+                }
+            )
+        }
+    }else{
+console.log('sub')
+      if(userInfo.wishlist.length){
+        userInfo.wishlist.forEach((item) => {
+            if (item.id == req.query.productId && item.quantity===1) {
+              User.updateOne(
+                { "_id" : req.user.user_id},
+                {
+                    $pull:
+                        { "wishlist": { "id": req.query.productId } }
+                }).then((item)=>{
+                  return res.json({
+                    success:true,
+                    "mesege":"total deleted korte hbe"
+                  })
+                })
+            }else if(item.id == req.query.productId && item.quantity>1){
+              User.findOneAndUpdate(
+                { _id:  req.user.user_id, "wishlist.id": req.query.productId },
+                { $inc: { "wishlist.$.quantity": -1 } },
+                { new: true },
+                (err, userInfo) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json(userInfo.wishlist)
+                }
+            )
+
+            }
+        })
+      }
+     
+ 
+
+    }
+
+  })
+});
+
 
 router.get('/removeFromCart', userAuth,
 checkRole(["user","admin"]), async(req, res) => {
@@ -436,6 +514,24 @@ checkRole(["user","admin"]), async(req, res) => {
     {
         $pull:
             { "cart": { "id": req.query.productId } }
+    }).then((item)=>{
+      return res.json({
+        success:true,
+        "mesege":"deleted"
+      })
+    })
+
+   
+})
+
+router.get('/removeFromWish', userAuth,
+checkRole(["user","admin"]), async(req, res) => {
+
+  await User.updateOne(
+    { "_id" : req.user.user_id},
+    {
+        $pull:
+            { "wishlist": { "id": req.query.productId } }
     }).then((item)=>{
       return res.json({
         success:true,

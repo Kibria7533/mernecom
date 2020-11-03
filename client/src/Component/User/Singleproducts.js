@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import Collapsible from 'react-collapsible';
 import Avatar from 'react-avatar';
 import Moment from 'react-moment';
+import { Multiselect } from 'multiselect-react-dropdown';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser'
 export default class Singleproducts extends Component {
   constructor (props){
@@ -119,25 +120,24 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
     activeColor="#ffd700"
     edit={false}
   />
-            <span className="review-no">41 reviews</span>
+            <span className="review-no">{this.state.comments.length} reviews</span>
           </div>
         <div className="product-description">{ ReactHtmlParser(this.state.Product.description) }</div>
         <h4 className="price">current price: <span>${this.state.Product.price}</span></h4>
-          <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-          <h5 className="sizes">sizes:
-          {this.state.sizes.map((it,index)=>{
-            return( <span key={index} className="size" data-toggle="tooltip" title="small">{it.name}</span>)
-          })
+        <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>({this.state.comments.length} votes)</strong></p>
+        
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Select availabel Size</label>
+            <Multiselect
+              options={this.state.sizes} // Options to display in the dropdown
+              selectedValues={this.state.selectedsize} // Preselected value to persist in dropdown
+              onSelect={this.onSelect} // Function will trigger on select event
+              onRemove={this.onRemove} // Function will trigger on remove event
+              displayValue="name" // Property name to display in the dropdown options
 
-          }
-           
-            
-          </h5>
-          <h5 className="colors">colors:
-            <span className="color orange not-available" data-toggle="tooltip" title="Not In store" />
-            <span className="color green" />
-            <span className="color blue" />
-          </h5>
+            />
+
+          </div>
           <div className="action">
             <button className="add-to-cart btn btn-default" onClick={()=>this.props.addToCarthandler(this.props.match.params.productId,"add")}  type="button">add to cart</button>
            

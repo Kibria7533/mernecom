@@ -12,7 +12,7 @@ const Navigation = () => (
       <a href="/cart" >My Cart</a>
       </li>
       <li>
-      <Link to="/logout" >My Wishlist</Link>
+      <a href="/wishlist" >My Wishlist</a>
       </li>
       <li>
       <a href="/customerorderlist" >My Order</a>
