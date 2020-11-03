@@ -12,7 +12,7 @@ mongoose.connect(process.env.DB_URL,{useNewUrlParser:true,useUnifiedTopology:tru
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
-  console.log("database connected");
+  console.log("database connected cool");
 });
 
 
