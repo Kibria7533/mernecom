@@ -34,8 +34,8 @@ class CheckoutForm extends React.Component {
                                     size: 'large',
                                     color: 'blue',
                                     shape: 'rect',
-                                    width:"346px",
-                                    marginTop:"47",
+                                   
+                                   
                                     height: "45px",
                                     backgroundColor:"brown",
                                     paddingTop:"10px",

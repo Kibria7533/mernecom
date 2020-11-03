@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import Collapsible from 'react-collapsible';
 import Avatar from 'react-avatar';
 import Moment from 'react-moment';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser'
 export default class Singleproducts extends Component {
   constructor (props){
     super(props);
@@ -71,6 +72,8 @@ onchange=(e)=>{
 }
 handleSubmit=(e)=>{
 e.preventDefault();
+if(!localStorage.getItem('auth'))
+return alert("Please login to comment")
 Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.state.rating,productId:this.productId},{
   headers: {
     'Accept': 'application/json',
@@ -118,7 +121,7 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
   />
             <span className="review-no">41 reviews</span>
           </div>
-        <p className="product-description">{this.state.Product.title}</p>
+        <div className="product-description">{ ReactHtmlParser(this.state.Product.description) }</div>
         <h4 className="price">current price: <span>${this.state.Product.price}</span></h4>
           <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
           <h5 className="sizes">sizes:
@@ -137,7 +140,8 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
           </h5>
           <div className="action">
             <button className="add-to-cart btn btn-default" onClick={()=>this.props.addToCarthandler(this.props.match.params.productId,"add")}  type="button">add to cart</button>
-            <button className="like btn btn-default" type="button" style={{marginLeft: "14px"}}><span className="fa fa-heart" /></button>
+           
+            <button className="like btn btn-default" type="button" style={{marginLeft: "4px"}}><span className="fa fa-heart" /></button>
           </div>
         </div>
       </div>
@@ -146,8 +150,8 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
   <div className="row">
     <div className="col-xs-9">
       <ul className="menu-items">
-        <li className={this.state.commentshow && "active"} onClick={()=>this.setState({commentshow:!this.state.commentshow,detailsshow:!this.state.detailsshow})}>Comments and review</li>
-        <li className={this.state.detailsshow && "active"} onClick={()=>this.setState({commentshow:!this.state.commentshow,detailsshow:!this.state.detailsshow})}>Details Features</li>
+        <li className={this.state.commentshow ?"active":""} onClick={()=>this.setState({commentshow:!this.state.commentshow,detailsshow:!this.state.detailsshow})}>Comments and review</li>
+        <li className={this.state.detailsshow ?"active":""} onClick={()=>this.setState({commentshow:!this.state.commentshow,detailsshow:!this.state.detailsshow})}>Details Features</li>
         
       </ul>
     {this.state.commentshow &&
@@ -170,7 +174,7 @@ Axios.post(`${URL}/savecomment&reviews`,{comment:this.state.comment,rating:this.
             {this.state.comments.map((item,index)=>{
       return(
             
-              <li className="list-group-item" style={{minWidth:"400px"}}>
+              <li className="list-group-item" key={index} style={{minWidth:"400px"}}>
                 <div className="row">
                  
                   <div className="col-xs-10 col-md-11 ml-1">

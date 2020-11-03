@@ -28,7 +28,7 @@ profile:[]
                <div className="container emp-profile">
   <form method="post">
   {this.state.profile.map((item,index)=>{
-        return(<>
+        return(<div key={index}>
  <div className="row">
       <div className="col-md-4">
       
@@ -122,7 +122,7 @@ profile:[]
       </div>
     </div>
 
-        </>
+        </div>
         )
       })}
    

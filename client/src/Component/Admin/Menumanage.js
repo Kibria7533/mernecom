@@ -341,7 +341,7 @@ await axios.post(`${URL}/editcategory`, { "oldcategory": this.state.editcategory
         
             <form className="form-inline" onSubmit={this.addmegasub}>
             <div className="form-group">
-    <label for="exampleFormControlSelect1" style={{paddingRight:"5px"}}>Megamenuholder Select</label>
+    <label htmlFor="exampleFormControlSelect1" style={{paddingRight:"5px"}}>Megamenuholder Select</label>
     <select className="form-control" id="exampleFormControlSelect1" onChange={this.megaset}>
     <option value="0">Please select Megaholder</option>
     {this.state.data.map((item,index)=>{

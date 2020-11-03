@@ -9,7 +9,7 @@ class Adminbody extends Component {
     {/* flight section */}
     <div className="bhoechie-tab-content active">
       <center>
-     <b> <i class="fa fa-gears" style={{"fontSize":"76px"}}></i></b>
+     <b> <i className="fa fa-gears" style={{"fontSize":"76px"}}></i></b>
        
         <h2 style={{marginTop: 0, color: '#00001a'}}>Welcome</h2>
         <h3 style={{marginTop: 0, color: '#00001a'}}>Administrator</h3>
