@@ -1,3 +1,3 @@
-const URL='https://mernecomkb.herokuapp.com/'
+const URL='https://mernecomkb.herokuapp.com'
 
 module.exports=URL;
