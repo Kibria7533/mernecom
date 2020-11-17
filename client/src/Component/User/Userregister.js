@@ -174,7 +174,7 @@ class Userregister extends Component {
                         cookiePolicy={'single_host_origin'}
                       />
                        <FacebookLogin
-                        appId="335565637562761"
+                        appId="821163598451351"
                         autoLoad={false}
                         callback={this.responseFacebook}
                         cssClass="my-facebook-button-class"

@@ -229,7 +229,7 @@ router.post('/forgotpassordorusername', async (req, res) => {
       }
     });
 
-    var link = `http://localhost:3000/forgotpasswordform/${forgetpasswordToken}`;
+    var link = `${process.env.Call_Back}/forgotpasswordform/${forgetpasswordToken}`;
     let username = emailExist.username;
     var mailOptions = {
       from: 'tenminuteversity@gmail.com',
